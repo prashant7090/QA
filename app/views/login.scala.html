@@ -1,0 +1,34 @@
+@(user: Form[Login])(result: String)
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+	   
+	   @helper.form(action = routes.HomeController.authenticate){
+	   		Email: <input name="email">
+			<span>
+				@if(user != null && user.errors().containsKey("email")){
+					@user.error("email").message()
+
+				}
+			</span>
+	   		<br>
+	   		Password:<input type= "password" name="password">
+			<span>
+				@if(user != null && user.errors().containsKey("password")){
+					@user.error("password").message()
+				}
+			</span>
+	   		<span>
+				@if(result.equals("error")){
+					The email and password you entered don't match.
+				}
+			</span>
+	   		<br>
+
+	   		<input type="submit">
+	   }
+    
+    </body>
+</html>
